@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shadow DOM with Template Element</title>
+</head>
+<body>
+<div id="shadowHost2"></div>
+
+<div id="shadowHost">
+  <template id="tmpl">
+    <style>
+      * {
+        color: #f00;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.3em;
+      }
+      :host {
+        background-color: #c8def4;
+        border: 1px solid #000;
+        padding: 1em;
+        width: 200px;
+        margin: 1em;
+      }
+    </style>
+    <div>
+      <img src="../app/assets/images/spy.png" alt="binoculars">
+      <p>This is a shadow DOM element.</p></div>
+  </template>
+    <template id="tmpl2">
+	<!--<style>
+      :host {
+        background-color: yellow;
+        border: 2px solid #000;
+        padding: 1em;
+        width: 200px;
+        margin: 1em;
+      }
+    </style>-->
+        <h1>This is a second shadow DOM element.</h1>
+    </template>
+</div>
+<button id="shadowDomElement">Show Shadow DOM Element</button>
+<button id="shadowDomElement2">Show Shadow DOM 2 Element</button>
+
+<script>
+  document.querySelector('#shadowDomElement').addEventListener('click', showShadowDomElement);
+  function showShadowDomElement() {
+    let host = document.querySelector('#shadowHost');
+    let shadowRoot = host.createShadowRoot();
+    shadowRoot.appendChild(document.querySelector('#tmpl').content);
+  document.querySelector('#shadowDomElement').removeEventListener('click', showShadowDomElement);
+  }
+    document.querySelector('#shadowDomElement2').addEventListener('click', showShadowDomElement2);
+  function showShadowDomElement2() {
+    let host = document.querySelector('#shadowHost');
+    let shadowRoot = host.createShadowRoot();
+    shadowRoot.appendChild(document.querySelector('#tmpl2').content);
+	    document.querySelector('#shadowDomElement2').removeEventListener('click', showShadowDomElement2);
+
+  }
+</script>
+</body>
+</html>

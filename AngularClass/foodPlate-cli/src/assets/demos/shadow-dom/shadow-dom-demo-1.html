@@ -1,0 +1,27 @@
+<html>
+<head>
+  <title>Shadow Dom</title>
+  <style>
+    h1 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #f00; /* red */
+    }
+  </style>
+</head>
+<body>
+<h1>The Shadow Dom</h1>
+<p>The <code>&lt;h1&gt;</code> above is styled in the <code>&lt;head&gt;</code> section to be red.</p>
+<p id="hostElement"></p>
+<p>The shadow dom is a separate DOM tree that is not a part of the main DOM tree.</p>
+<script>
+  // create shadow DOM on the <p> element above
+  //create a host element for the shadow dom
+  const shadowElement = document.querySelector('#hostElement');
+  const shadowParagraph = shadowElement.attachShadow({mode: 'open'});
+  shadowParagraph.innerHTML = '<h1>I live in the shadows!</h1>';
+  //change mode to close and check console.assert statement
+  //closed mode is to disallow any access to a node in a closed shadow root from an outside context.
+ console.assert(shadowElement.shadowRoot === shadowParagraph)
+</script>
+</body>
+</html>
